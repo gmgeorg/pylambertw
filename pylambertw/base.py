@@ -158,12 +158,12 @@ class Theta:
     def tau(self):
         """Converts Theta (distribution dependent) to Tau (transformation only)."""
 
-        distr_constr = lwd.get_distribution_constructor(self.distribution_name)
+        distr_constr = lwd.utils.get_distribution_constructor(self.distribution_name)
         distr = distr_constr(**self.beta)
 
         return Tau(
             loc=distr.mean.numpy()
-            if lwd.is_location_family(self.distribution_name)
+            if lwd.utils.is_location_family(self.distribution_name)
             else 0.0,
             scale=distr.stddev.numpy(),
             lambertw_params=self.lambertw_params,

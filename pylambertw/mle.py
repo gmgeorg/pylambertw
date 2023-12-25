@@ -50,7 +50,7 @@ class MLE(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
         self.distribution_name = distribution_name
         self.distribution_constructor = (
             distribution_constructor
-            or lwd.get_distribution_constructor(self.distribution_name)
+            or lwd.utils.get_distribution_constructor(self.distribution_name)
         )
         self.lambertw_type = base.LambertWType(lambertw_type)
         self.max_iter = max_iter
@@ -73,14 +73,14 @@ class MLE(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
         if self.lambertw_type == base.LambertWType.H:
             self.igmm = igmm.IGMM(
                 lambertw_type=self.lambertw_type,
-                location_family=lwd.is_location_family(self.distribution_name),
+                location_family=lwd.utils.is_location_family(self.distribution_name),
             )
             self.igmm.fit(data)
             x_init = self.igmm.transform(data)
 
             lambertw_params_init = self.igmm.tau.lambertw_params
         else:
-            if lwd.is_location_family(self.distribution_name):
+            if lwd.utils.is_location_family(self.distribution_name):
                 # Default to Normal distriubtion for location family.
                 params_data = ud.estimate_params(data, "Normal")
                 loc_init = params_data["loc"]
@@ -92,7 +92,7 @@ class MLE(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
                 scale_init = 1.0 / params_data["rate"]
 
             z_init = (data - loc_init) / scale_init
-            if lwd.is_location_family(self.distribution_name):
+            if lwd.utils.is_location_family(self.distribution_name):
                 gamma_init = igmm.gamma_taylor(z_init)
             else:
                 gamma_init = 0.01

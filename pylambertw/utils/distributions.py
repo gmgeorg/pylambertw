@@ -36,8 +36,8 @@ def torch_sigmoid(x: torch.tensor) -> torch.tensor:
 def get_params_activations(distribution_name: str) -> Dict[str, Callable]:
     """Get activation functions for each distribution parameters."""
     assert isinstance(distribution_name, str)
-    distr_constr = lwd.get_distribution_constructor(distribution_name)
-    param_names = lwd.get_distribution_args(distr_constr)
+    distr_constr = lwd.utils.get_distribution_constructor(distribution_name)
+    param_names = lwd.utils.get_distribution_args(distr_constr)
 
     act_fns = {p: (torch_linear, linear_inverse) for p in param_names}
 
