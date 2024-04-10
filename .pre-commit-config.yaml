@@ -11,7 +11,7 @@ repos:
     hooks:
     - id: pytest
       name: pytest
-      entry: ./.venv/bin/pytest tests
+      entry: ./.venv/bin/pytest pylambertw/tests
       language: system
       type: [python]
       pass_filenames: false
