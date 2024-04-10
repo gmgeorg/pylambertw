@@ -1,8 +1,30 @@
-[tool.ruff]
-line-length = 100
+[tool.poetry]
+name = "pylambertw"
+version = "0.1.1"
+description = "Python implementation of the Lambert W x F framework for analyzing skewed, heavy-tailed distribution with an sklearn interface and torch based maximum likelihood estimation (MLE)."
+authors = ["Georg M. Goerg <im@gmge.org>"]
+homepage = "https://github.com/gmgeorg/pylambertw.git"
 
-fix = true
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
 
+numpy = ">=1.0.1"
+scipy = ">=1.6.0"
+pandas = ">=1.0.0"
+matplotlib = ">=3.3.0"
+statsmodels = ">=0.12.0"
+seaborn = ">=0.11.1"
+tqdm = ">=4.62.3"
+dataclasses = ">=0.6"
+scikit-learn = ">=1.0.1"
+torch = ">=2.0.1"
+torchlambertw = { git = "https://github.com/gmgeorg/torchlambertw.git", rev = "v0.0.3" }
 
-[tool.ruff.per-file-ignores]
-"setup.py" = ['E501']  # line length violations
+[tool.poetry.group.dev.dependencies]
+pytest = ">=6.1.1"
+ruff = "^0.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
