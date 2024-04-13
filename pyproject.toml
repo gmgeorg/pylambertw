@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "pylambertw"
-version = "0.1.1"
+version = "0.0.4"
 description = "Python implementation of the Lambert W x F framework for analyzing skewed, heavy-tailed distribution with an sklearn interface and torch based maximum likelihood estimation (MLE)."
 authors = ["Georg M. Goerg <im@gmge.org>"]
 homepage = "https://github.com/gmgeorg/pylambertw.git"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.13"
+python = "^3.9"
 
 numpy = ">=1.0.1"
-scipy = ">=1.6.0"
+scipy = ">=1.7.0"
 pandas = ">=1.0.0"
 matplotlib = ">=3.3.0"
 statsmodels = ">=0.12.0"
@@ -22,7 +22,14 @@ torchlambertw = { git = "https://github.com/gmgeorg/torchlambertw.git", rev = "v
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=6.1.1"
+flake8 = "^7.0.0"
 pre-commit = "^3.7.0"
+ruff = "^0.3.7"
+
+[tool.ruff]
+line-length = 100
+
+fix = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

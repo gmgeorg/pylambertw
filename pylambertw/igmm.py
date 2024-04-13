@@ -216,7 +216,7 @@ class IGMM(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
         self._initialize_params(data)
 
         tau_trace = np.zeros(shape=(self.max_iter + 1, 3))
-        tau_trace[0, :] = np.array(
+        tau_trace[0,] = np.array(
             [
                 self.tau_init.loc,
                 self.tau_init.scale,

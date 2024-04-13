@@ -29,7 +29,8 @@ else:
 
 
 def _dict_torch_to_series(dict_torch: Dict[str, torch.Tensor]) -> pd.Series:
-    return pd.Series({k: float(v.detach().numpy()) for k, v in dict_torch.items()})
+    """Turns a dictionary of torch tensors (float) into a pandas Series."""
+    return pd.Series({k: float(v.detach().numpy().item()) for k, v in dict_torch.items()})
 
 
 class MLE(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
@@ -49,8 +50,7 @@ class MLE(sklearn.base.BaseEstimator, sklearn.base.TransformerMixin):
         """Initializes the class."""
         self.distribution_name = distribution_name
         self.distribution_constructor = (
-            distribution_constructor
-            or lwd.utils.get_distribution_constructor(self.distribution_name)
+            distribution_constructor or lwd.utils.get_distribution_constructor(self.distribution_name)
         )
         self.lambertw_type = base.LambertWType(lambertw_type)
         self.max_iter = max_iter
