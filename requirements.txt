@@ -1,4 +1,4 @@
-cython==0.29.22
+cython>=3.0.10
 dataclasses>=0.6
 git+https://github.com/gmgeorg/torchlambertw.git
 matplotlib>=3.3.0
